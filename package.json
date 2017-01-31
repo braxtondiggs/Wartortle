@@ -1,0 +1,29 @@
+{
+  "name": "wartortle",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://braxtondiggs.com",
+  "author": {
+    "name": "Braxton Diggs",
+    "email": "braxtondiggs@gmail.com"
+  },
+  "main": "index.js",
+  "keywords": [
+    ""
+  ],
+  "repository": "braxtondiggs/wartortle",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1",
+    "mongodb": "^2.2.22",
+    "promise": "^7.1.1",
+    "wakatime": "0.0.2"
+  }
+}
