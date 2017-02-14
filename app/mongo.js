@@ -75,12 +75,10 @@ module.exports.get = function(range) {
             'Editors': values[0],
             'Languages': values[1]
           });
+          db.close();
         })
         .catch(function(reason) {
           reject(reason);
-        })
-        .finally(function(reason) {
-          db.close();
         });
     });
   });
