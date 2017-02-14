@@ -10,29 +10,63 @@ module.exports.get = function(range) {
         .toISOString()
     };
     switch (range) {
-      case 'week':
+      case 'yesterday':
+        date.start = moment()
+          .subtract(2, 'days')
+          .toISOString();
+        break;
+      case 'last7days':
         date.start = moment()
           .subtract(1, 'weeks')
           .toISOString();
         break;
-      case 'month':
+      case 'last14days':
+        date.start = moment()
+          .subtract(2, 'weeks')
+          .toISOString();
+        break;
+      case 'last30days':
         date.start = moment()
           .subtract(1, 'months')
           .toISOString();
         break;
-      case 'half_year':
+      case 'thisweek':
         date.start = moment()
-          .subtract(6, 'months')
+          .startOf('week')
+          .toISOString();
+        date.end = moment()
+          .endOf('week')
           .toISOString();
         break;
-      case 'year':
+      case 'lastweek':
         date.start = moment()
-          .subtract(1, 'years')
+          .subtract(1, 'weeks')
+          .startOf('isoWeek')
+          .toISOString();
+        date.end = moment()
+          .subtract(1, 'weeks')
+          .endOf('isoWeek')
           .toISOString();
         break;
-      case 'all':
-        date.start = moment('2017-01-31')
+      case 'thismonth':
+        date.start = moment()
+          .startOf('month')
           .toISOString();
+        date.end = moment()
+          .endOf('month')
+          .toISOString();
+        break;
+      case 'lastmonth':
+        date.start = moment()
+          .subtract(1, 'months')
+          .startOf('month')
+          .toISOString();
+        date.end = moment()
+          .subtract(1, 'months')
+          .endOf('month')
+          .toISOString();
+        break;
+      case 'customrange':
         break;
     }
     return date;
@@ -72,8 +106,9 @@ module.exports.get = function(range) {
       Promise.all([editorPromise, languagePromise])
         .then(function(values) {
           resolve({
-            'Editors': values[0],
-            'Languages': values[1]
+            'Editors': formatValue(values[0]),
+            'Languages': formatValue(values[1]),
+            'Timeline': formatTimeline(values[1])
           });
           db.close();
         })
@@ -81,6 +116,38 @@ module.exports.get = function(range) {
           reject(reason);
         });
     });
+
+    function formatValue(data) {
+      return _.chain(data)
+        .groupBy(function(e) {
+          return e.name;
+        })
+        .map(function(group) {
+          return _.reduce(group, function(current, next) {
+            return {
+              name: next.name,
+              total_seconds: current.total_seconds + next.total_seconds
+            };
+          });
+        })
+        .value();
+    }
+
+    function formatTimeline(timeline) {
+      return _.chain(timeline)
+        .groupBy(function(e) {
+          return e.date;
+        })
+        .map(function(group) {
+          return _.reduce(group, function(current, next) {
+            return {
+              total_seconds: current.total_seconds + next.total_seconds,
+              date: next.date
+            };
+          });
+        })
+        .value();
+    }
   });
 }
 module.exports.save = function(waka) {

@@ -7,7 +7,7 @@ var MongoDB = require('./app/mongo.js');
 app.use(bodyParser.json());
 app.use(cors());
 app.get('/', function(req, res) {
-  var params = ['week', 'month', 'half_year', 'year', 'all'];
+  var params = ['yesterday', 'last7days', 'last14days', 'last30days', 'thisweek', 'lastweek', 'thismonth', 'lastmonth', 'customrange'];
   if (req.query.range && _.indexOf(params, req.query.range) !== -1) {
     MongoDB.get(req.query.range)
       .then(function(data) {
