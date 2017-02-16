@@ -17,6 +17,11 @@ module.exports.getDaily = function() {
             return _.merge(_.pick(language, ['name', 'total_seconds']), {
               date: summary.start
             });
+          }),
+          projects: _.map(summary.data[0].projects, function(projects) {
+            return _.merge(_.pick(projects, ['name', 'total_seconds']), {
+              date: summary.start
+            });
           })
         });
       } else {

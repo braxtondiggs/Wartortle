@@ -108,12 +108,27 @@ module.exports.get = function(range, start, end) {
             });
           });
       });
-      Promise.all([editorPromise, languagePromise])
+      var projectPromise = new Promise(function(res, rej) {
+        var cursor = db.collection('Projects')
+          .find({
+            date: {
+              $gte: date.start,
+              $lte: date.end
+            }
+          }, function(err, cursor) {
+            cursor.toArray(function(err, items) {
+              if (err) rej(err);
+              res(items);
+            });
+          });
+      });
+      Promise.all([editorPromise, languagePromise, projectPromise])
         .then(function(values) {
           resolve({
             'Editors': formatValue(values[0]),
             'Languages': formatValue(values[1]),
-            'Timeline': formatTimeline(values[1])
+            'Timeline': formatTimeline(values[1]),
+            'Projects': formatTimeline(values[2])
           });
           db.close();
         })
@@ -165,6 +180,10 @@ module.exports.save = function(waka) {
       if (!_.isEmpty(waka.languages)) {
         db.collection('Languages')
           .insert(waka.languages);
+      }
+      if (!_.isEmpty(waka.projects)) {
+        db.collection('Projects')
+          .insert(waka.projects);
       }
     } else {
       console.log(err);
