@@ -9,18 +9,14 @@ app.use(cors());
 app.get('/', function(req, res) {
   var params = ['yesterday', 'last7days', 'last14days', 'last30days', 'thisweek', 'lastweek', 'thismonth', 'lastmonth', 'customrange'];
   if (req.query.range && _.indexOf(params, req.query.range) !== -1) {
-    MongoDB.get(req.query.range, req.query.start, req.query.end)
-      .then(function(data) {
-        res.status(200)
-          .json(data);
-      })
+    MongoDB.get(req.query.range, req.query.start, req.query.end).then(function(data) {
+      res.status(200).json(data);
+    })
   } else {
-    res.status(500)
-      .send('Something broke!');
+    res.status(500).send('Something broke!');
   }
 });
 var server = app.listen(process.env.PORT || 8080, function() {
-  var port = server.address()
-    .port;
+  var port = server.address().port;
   console.log('App now running on port', port);
 });

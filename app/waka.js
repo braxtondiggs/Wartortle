@@ -1,10 +1,11 @@
 var WakaInstance = require('wakatime'),
   _ = require('lodash'),
-  promise = require('promise');
+  promise = require('promise'),
+  moment = require('moment');
 module.exports.getDaily = function() {
   return new Promise(function(resolve, reject) {
     var wi = new WakaInstance(process.env.WAKATIME_API);
-    wi.summaries(new Date(), function(error, response, summary) {
+    wi.summaries(moment().subtract(1, 'days').format('YYYY-MM-DD'), function(error, response, summary) {
       if (!error && response.statusCode == 200) {
         var summary = JSON.parse(summary);
         resolve({
