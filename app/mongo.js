@@ -3,7 +3,7 @@ var MongoClient = require('mongodb')
   promise = require('promise'),
   _ = require('lodash'),
   moment = require('moment');
-module.exports.get = function(range) {
+module.exports.get = function(range, start, end) {
   function calcRange(range) {
     var date = {
       end: moment()
@@ -67,6 +67,11 @@ module.exports.get = function(range) {
           .toISOString();
         break;
       case 'customrange':
+        date.start = moment(start, 'MMM Do YYYY')
+          .toISOString();
+        date.end = moment(end, 'MMM Do YYYY')
+          .add(1, 'days')
+          .toISOString();
         break;
     }
     return date;

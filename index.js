@@ -9,7 +9,7 @@ app.use(cors());
 app.get('/', function(req, res) {
   var params = ['yesterday', 'last7days', 'last14days', 'last30days', 'thisweek', 'lastweek', 'thismonth', 'lastmonth', 'customrange'];
   if (req.query.range && _.indexOf(params, req.query.range) !== -1) {
-    MongoDB.get(req.query.range)
+    MongoDB.get(req.query.range, req.query.start, req.query.end)
       .then(function(data) {
         res.status(200)
           .json(data);
