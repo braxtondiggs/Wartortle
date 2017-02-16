@@ -2,7 +2,8 @@ var MongoClient = require('mongodb')
   .MongoClient,
   promise = require('promise'),
   _ = require('lodash'),
-  moment = require('moment');
+  moment = require('moment'),
+  WakaTime = require('./waka.js');
 module.exports.get = function(range, start, end) {
   function calcRange(range) {
     var date = {
@@ -170,5 +171,41 @@ module.exports.save = function(waka) {
       console.log(err);
     }
     db.close();
+  });
+}
+module.exports.all = function() {
+  return new Promise(function(resolve, reject) {
+    WakaTime.getRange({
+        start: '2016-06-22',
+        end: moment()
+          .format('YYYY-MM-DD')
+      })
+      .then(function(data) {
+        MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+          if (!err) {
+            function insert(collection, value) {
+              db.collection(collection)
+                .insertMany(value);
+            }
+            var editors = _.map(data, 'editors');
+            var languages = _.map(data, 'languages');
+            var projects = _.map(data, 'projects');
+            _.forEach(editors, function(value) {
+              insert('Editors', value);
+            })
+            _.forEach(languages, function(value) {
+              insert('Languages', value);
+            })
+            _.forEach(projects, function(value) {
+              insert('Projects', value);
+            })
+            resolve({
+              "Editors": editors,
+              "Languages": languages,
+              "Projects": projects
+            })
+          }
+        });
+      });
   });
 }

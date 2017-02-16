@@ -19,6 +19,13 @@ app.get('/', function(req, res) {
       .send('Something broke!');
   }
 });
+app.get('/all', function(req, res) {
+  MongoDB.all()
+    .then(function(data) {
+      res.status(200)
+        .json(data);
+    });
+});
 var server = app.listen(process.env.PORT || 8080, function() {
   var port = server.address()
     .port;
