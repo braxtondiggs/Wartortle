@@ -91,7 +91,7 @@ module.exports.get = function(range, start, end) {
           'Editors': formatValue(values[0]),
           'Languages': formatValue(values[1]),
           'Timeline': formatTimeline(values[1]),
-          'Projects': formatTimeline(values[2])
+          'Projects': formatProject(values[2])
         });
         db.close();
       }).catch(function(reason) {
@@ -120,6 +120,19 @@ module.exports.get = function(range, start, end) {
           return {
             total_seconds: current.total_seconds + next.total_seconds,
             date: next.date
+          };
+        });
+      }).value();
+    }
+
+    function formatProject(project) {
+      return _.chain(project).groupBy(function(e) {
+        return e.name
+      }).map(function(group) {
+        return _.reduce(group, function(current, next) {
+          return {
+            name: next.name,
+            total_seconds: current.total_seconds + next.total_seconds
           };
         });
       }).value();

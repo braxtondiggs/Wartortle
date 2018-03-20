@@ -17,4 +17,4 @@ Integration with [WakaTime](https://wakatime.com) to grab data for [my personal 
 
 2. Run `heroku config:get WAKATIME_API -s  >> .env && heroku config:get MONGODB_URI -s  >> .env` to install Heroku Environment Variables.
 
-3. Run `nf run demon index.js` to start the development server.
+3. Run `nf run nodemon index.js` to start the development server.
