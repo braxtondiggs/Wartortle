@@ -1,7 +1,7 @@
 {
   "name": "wartortle",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Integration with WakaTime to grab data for my personal website",
   "homepage": "http://braxtondiggs.com",
   "author": {
     "name": "Braxton Diggs",
@@ -14,20 +14,47 @@
   "repository": "braxtondiggs/wartortle",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node dist",
+    "build": "tsc",
+    "serve": "npm run build && npm start",
+    "heroku-postbuild": "tsc",
+    "test": "tslint tslint.json \"./**/*.{ts,tsx}\"",
+    "watch": "nodemon -e ts -w ./src -x npm run serve"
   },
   "dependencies": {
-    "body-parser": "^1.16.0",
-    "cors": "^2.8.1",
-    "express": "^4.14.1",
-    "lodash": "^4.17.4",
-    "moment": "^2.17.1",
-    "mongodb": "^2.2.22",
-    "promise": "^7.1.1",
-    "wakatime": "0.0.2"
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/debug": "0.0.30",
+    "@types/express": "^4.16.0",
+    "@types/helmet": "0.0.38",
+    "@types/lodash": "^4.14.111",
+    "@types/mongodb": "^3.1.1",
+    "@types/mongoose": "^5.2.0",
+    "@types/request": "^2.47.1",
+    "@types/request-promise": "^4.1.41",
+    "actions-on-google": "^2.2.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "express-validator": "^5.2.0",
+    "helmet": "^3.12.1",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.1",
+    "mongoose": "^5.2.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "typescript": "^2.9.2",
+    "wakatime": "^1.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "husky": "^0.14.3",
+    "tslint": "^5.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   }
 }
