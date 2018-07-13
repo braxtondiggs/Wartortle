@@ -22,4 +22,4 @@ export const LanguageSchema: Schema = new Schema({
   }
 });
 
-export const Language: Model<ILanguage> = model<ILanguage>('Language', LanguageSchema, 'Language');
+export const Language: Model<ILanguage> = model<ILanguage>('Languages', LanguageSchema, 'Languages');

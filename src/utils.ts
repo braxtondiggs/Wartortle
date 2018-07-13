@@ -1,8 +1,7 @@
 'use strict';
-import { Editor, IEditor, ILanguage, IProject, Language, Project } from './schemas';
-
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { Editor, IEditor, ILanguage, IProject, Language, Project } from './schemas';
 
 export class Utils {
   public calcRange(range: string, start?: string, end?: string): { end: string, start: string } {
@@ -47,6 +46,58 @@ export class Utils {
         break;
     }
     return date;
+  }
+
+  public async getEditors(range: string, start?: string, end?: string) {
+    const date = this.calcRange(range, start, end);
+    return this.format(await Editor.find({
+      date: {
+        $gte: date.start,
+        $lte: date.end
+      }
+    }));
+  }
+
+  public async getLanguages(range: string, start?: string, end?: string) {
+    const date = this.calcRange(range, start, end);
+    return this.format(await Language.find({
+      date: {
+        $gte: date.start,
+        $lte: date.end
+      }
+    }));
+  }
+
+  public async getProjects(range: string, start?: string, end?: string) {
+    const date = this.calcRange(range, start, end);
+    return this.format(await Project.find({
+      date: {
+        $gte: date.start,
+        $lte: date.end
+      }
+    }));
+  }
+
+  public async getTimeline(range: string, start?: string, end?: string) {
+    const date = this.calcRange(range, start, end);
+    return this.format(await Language.find({
+      date: {
+        $gte: date.start,
+        $lte: date.end
+      }
+    }), true);
+  }
+
+  private format(data: IEditor[] | ILanguage[] | IProject[], isTimeline: boolean = false): Array<({ name?: string, date?: string, total_seconds?: number } | undefined)> {
+    return _.chain(data)
+      .groupBy((o) => isTimeline ? o.date : o.name)
+      .map((o) =>
+        _.chain(o).reduce((current: any, next: any) => ({
+          date: isTimeline ? next.date : null,
+          name: !isTimeline ? next.name : null,
+          total_seconds: current.total_seconds + next.total_seconds
+        })).pickBy(_.identity).pick(['date', 'name', 'total_seconds']).value())
+      .value();
   }
 }
 

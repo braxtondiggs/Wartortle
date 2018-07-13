@@ -22,4 +22,4 @@ export const ProjectSchema: Schema = new Schema({
   }
 });
 
-export const Project: Model<IProject> = model<IProject>('Project', ProjectSchema, 'Project');
+export const Project: Model<IProject> = model<IProject>('Projects', ProjectSchema, 'Projects');

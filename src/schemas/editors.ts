@@ -22,4 +22,4 @@ export const EditorSchema: Schema = new Schema({
   }
 });
 
-export const Editor: Model<IEditor> = model<IEditor>('Editor', EditorSchema, 'Editor');
+export const Editor: Model<IEditor> = model<IEditor>('Editors', EditorSchema, 'Editors');
