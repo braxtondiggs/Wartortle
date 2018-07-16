@@ -20,6 +20,6 @@ export const LanguageSchema: Schema = new Schema({
     required: true,
     type: Number
   }
-});
+}, { versionKey: false });
 
 export const Language: Model<ILanguage> = model<ILanguage>('Languages', LanguageSchema, 'Languages');

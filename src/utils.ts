@@ -88,6 +88,12 @@ export class Utils {
     }), true);
   }
 
+  public async save(waka: any): Promise<any> {
+    if (!_.isEmpty(waka.editors)) await Editor.update({}, waka.editors, { multi: false });
+    if (!_.isEmpty(waka.languages)) await Language.update({}, waka.languages, { multi: false });
+    if (!_.isEmpty(waka.projects)) await Project.update({}, waka.projects, { multi: false });
+  }
+
   private format(data: IEditor[] | ILanguage[] | IProject[], isTimeline: boolean = false): Array<({ name?: string, date?: string, total_seconds?: number } | undefined)> {
     return _.chain(data)
       .groupBy((o) => isTimeline ? o.date : o.name)

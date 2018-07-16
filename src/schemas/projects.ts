@@ -20,6 +20,6 @@ export const ProjectSchema: Schema = new Schema({
     required: true,
     type: Number
   }
-});
+}, { versionKey: false });
 
 export const Project: Model<IProject> = model<IProject>('Projects', ProjectSchema, 'Projects');

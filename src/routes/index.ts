@@ -7,13 +7,13 @@ export class HomeRouter {
   public router: Router;
   constructor() {
     this.router = Router();
-    // this.index();
+    this.index();
   }
 
-  /*private index() {
+  private index() {
     this.router.get('/', [check(['range', 'start', 'end'])],
       EndpointController.all.bind(EndpointController));
-  }*/
+  }
 }
 
 export default new HomeRouter().router;

@@ -20,6 +20,6 @@ export const EditorSchema: Schema = new Schema({
     required: true,
     type: Number
   }
-});
+}, { versionKey: false });
 
 export const Editor: Model<IEditor> = model<IEditor>('Editors', EditorSchema, 'Editors');
