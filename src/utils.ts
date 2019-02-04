@@ -95,15 +95,16 @@ export class Utils {
   }
 
   private format(data: IEditor[] | ILanguage[] | IProject[], isTimeline: boolean = false): Array<({ name?: string, date?: string, total_seconds?: number } | undefined)> {
+    const objName = ['total_seconds'];
+    objName.push(isTimeline ? 'date' : 'name');
     return _.chain(data)
       .groupBy((o) => isTimeline ? o.date : o.name)
-      .map((o) =>
-        _.chain(o).reduce((current: any, next: any) => ({
-          date: isTimeline ? next.date : null,
-          name: !isTimeline ? next.name : null,
-          total_seconds: current.total_seconds + next.total_seconds
-        })).pickBy(_.identity).pick(['date', 'name', 'total_seconds']).value())
-      .value();
+      .map((o) => _.chain(o).reduceRight((current: any, next: any) => ({
+        date: isTimeline ? next.date : null,
+        name: !isTimeline ? next.name : null,
+        total_seconds: current.total_seconds + next.total_seconds
+      })).pickBy(_.identity).pick(objName).value())
+      .reject((o) => _.isUndefined(o.total_seconds)).value();
   }
 }
 
