@@ -13,6 +13,7 @@ import { Language, LanguageSchema } from './language/language.schema';
 import { ProjectModule } from './project/project.module';
 import { ProjectService } from './project/project.service';
 import { Project, ProjectSchema } from './project/project.schema';
+import { HealthModule } from './health/health.module';
 import { UtilService } from './util.service';
 
 @Module({
@@ -27,7 +28,8 @@ import { UtilService } from './util.service';
     ]),
     EditorModule,
     LanguageModule,
-    ProjectModule
+    ProjectModule,
+    HealthModule
   ],
   controllers: [AppController],
   providers: [
