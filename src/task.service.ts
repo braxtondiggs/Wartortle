@@ -7,7 +7,7 @@ import * as dayjs from 'dayjs';
 export class TaskService {
   private readonly logger = new Logger(TaskService.name);
   private readonly waka = new WakaTime(process.env.WAKATIME_API);
-  private yesterday = dayjs().subtract(1, 'days').format('YYYY-MM-DD');
+  private readonly yesterday = dayjs().subtract(1, 'days').format('YYYY-MM-DD');
 
   @Cron('15 19 * * *')
   async handleCron() {
