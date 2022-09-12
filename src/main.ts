@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import {
   FastifyAdapter,
   NestFastifyApplication
@@ -29,6 +30,8 @@ async function bootstrap() {
   await app.register(helmet);
   await app.register(fastifyCsrf);
   await app.register(compression);
+  app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   await app.listen(port, '0.0.0.0', () => {
     console.log(`Listening on port ${port}`);
   });

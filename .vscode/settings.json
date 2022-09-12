@@ -1,8 +1,15 @@
 {
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.formatOnSave": true,
-	"cSpell.words": [
-		"Fastify",
-		"nestjs"
-	]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "customrange",
+    "Fastify",
+    "lastmonth",
+    "lastweek",
+    "nestjs",
+    "thismonth"
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

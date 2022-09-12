@@ -1,12 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import { AppDto, QueryDto } from './app.dto';
+import { EditorService } from './editor/editor.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly editor: EditorService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async get(@Query() { range, start, end }: QueryDto): Promise<AppDto> {
+    const Editors = await this.editor.get(range, start, end);
+    return {
+      Editors
+    };
   }
 }
