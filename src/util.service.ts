@@ -4,6 +4,8 @@ import * as dayjs from 'dayjs';
 import * as isoWeek from 'dayjs/plugin/isoWeek';
 import { Editor } from './editor/editor.schema';
 import { PARAMS } from './app.dto';
+import { Language } from './language/language.schema';
+import { Project } from './project/project.schema';
 
 @Injectable()
 export class UtilService {
@@ -65,7 +67,7 @@ export class UtilService {
     return date;
   }
 
-  format(data: Editor[], isTimeline = false) {
+  format(data: Editor[] | Language[] | Project[], isTimeline = false) {
     const objName = ['total_seconds'];
     objName.push(isTimeline ? 'date' : 'name');
     return _.chain(data)
@@ -82,6 +84,6 @@ export class UtilService {
           .value()
       )
       .reject((o: { total_seconds: number }) => _.isUndefined(o.total_seconds))
-      .value() as Editor[];
+      .value() as Editor[] | Language[] | Project[];
   }
 }

@@ -11,4 +11,9 @@ export class LanguageController {
   getLanguage(@Query() { range, start, end }: QueryDto): Promise<Language[]> {
     return this.language.get(range, start, end);
   }
+
+  @Get('timeline')
+  getTimeline(@Query() { range, start, end }: QueryDto): Promise<Language[]> {
+    return this.language.get(range, start, end, true);
+  }
 }

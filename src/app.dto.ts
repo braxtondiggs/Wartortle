@@ -31,8 +31,14 @@ export class QueryDto {
   end: string;
 }
 
+export class Timeline {
+  date?: string;
+  total_seconds: number;
+}
+
 export class AppDto {
   Editors: Editor[];
   Languages: Language[];
   Projects: Project[];
+  Timeline: Timeline[];
 }

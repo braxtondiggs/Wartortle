@@ -12,7 +12,12 @@ export class LanguageService {
     private readonly utils: UtilService
   ) {}
 
-  async get(range: string, start?: string, end?: string): Promise<Language[]> {
+  async get(
+    range: string,
+    start?: string,
+    end?: string,
+    timeline = false
+  ): Promise<Language[]> {
     const { start: $gte, end: $lte } = this.utils.calcRange(range, start, end);
     const response = await this.LanguageModel.find({
       date: {
@@ -20,6 +25,6 @@ export class LanguageService {
         $lte
       }
     }).exec();
-    return this.utils.format(response);
+    return this.utils.format(response, timeline);
   }
 }

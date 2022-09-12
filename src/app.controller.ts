@@ -17,7 +17,8 @@ export class AppController {
     return {
       Editors: await this.editor.get(range, start, end),
       Languages: await this.language.get(range, start, end),
-      Projects: await this.project.get(range, start, end)
+      Projects: await this.project.get(range, start, end),
+      Timeline: await this.language.get(range, start, end, true)
     };
   }
 }
