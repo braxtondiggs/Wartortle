@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import * as isoWeek from 'dayjs/plugin/isoWeek';
-import { Editor } from './editor/editors.schema';
+import { Editor } from './editor/editor.schema';
 import { PARAMS } from './app.dto';
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { EditorService } from './editor.service';
 import { QueryDto } from 'src/app.dto';
-import { Editor } from './editors.schema';
+import { Editor } from './editor.schema';
 
 @Controller('editor')
 export class EditorController {

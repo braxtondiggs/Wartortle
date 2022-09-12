@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { EditorController } from './editor.controller';
 import { EditorService } from './editor.service';
 import { UtilService } from 'src/util.service';
-import { Editor, EditorSchema } from './editors.schema';
+import { Editor, EditorSchema } from './editor.schema';
 
 @Module({
   imports: [

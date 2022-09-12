@@ -6,18 +6,25 @@ import { AppController } from './app.controller';
 import { TaskService } from './task.service';
 import { EditorModule } from './editor/editor.module';
 import { EditorService } from './editor/editor.service';
+import { Editor, EditorSchema } from './editor/editor.schema';
+import { LanguageModule } from './language/language.module';
+import { LanguageService } from './language/language.service';
+import { Language, LanguageSchema } from './language/language.schema';
 import { UtilService } from './util.service';
-import { Editor, EditorSchema } from './editor/editors.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     ScheduleModule.forRoot(),
-    MongooseModule.forFeature([{ name: Editor.name, schema: EditorSchema }]),
-    EditorModule
+    MongooseModule.forFeature([
+      { name: Editor.name, schema: EditorSchema },
+      { name: Language.name, schema: LanguageSchema }
+    ]),
+    EditorModule,
+    LanguageModule
   ],
   controllers: [AppController],
-  providers: [EditorService, TaskService, UtilService]
+  providers: [EditorService, LanguageService, TaskService, UtilService]
 })
 export class AppModule {}

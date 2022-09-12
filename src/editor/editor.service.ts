@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UtilService } from 'src/util.service';
-import { Editor, EditorDocument } from './editors.schema';
+import { Editor, EditorDocument } from './editor.schema';
 
 @Injectable()
 export class EditorService {
