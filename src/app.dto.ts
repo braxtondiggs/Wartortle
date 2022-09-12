@@ -1,6 +1,7 @@
 import { IsString, IsDate, IsOptional, IsIn } from 'class-validator';
 import { Editor } from './editor/editor.schema';
 import { Language } from './language/language.schema';
+import { Project } from './project/project.schema';
 
 export const PARAMS = [
   'yesterday',
@@ -33,4 +34,5 @@ export class QueryDto {
 export class AppDto {
   Editors: Editor[];
   Languages: Language[];
+  Projects: Project[];
 }

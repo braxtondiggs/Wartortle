@@ -5,10 +5,10 @@ import { Language } from './language.schema';
 
 @Controller('language')
 export class LanguageController {
-  constructor(private readonly Language: LanguageService) {}
+  constructor(private readonly language: LanguageService) {}
 
   @Get()
   getLanguage(@Query() { range, start, end }: QueryDto): Promise<Language[]> {
-    return this.Language.get(range, start, end);
+    return this.language.get(range, start, end);
   }
 }

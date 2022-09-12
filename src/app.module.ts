@@ -10,6 +10,9 @@ import { Editor, EditorSchema } from './editor/editor.schema';
 import { LanguageModule } from './language/language.module';
 import { LanguageService } from './language/language.service';
 import { Language, LanguageSchema } from './language/language.schema';
+import { ProjectModule } from './project/project.module';
+import { ProjectService } from './project/project.service';
+import { Project, ProjectSchema } from './project/project.schema';
 import { UtilService } from './util.service';
 
 @Module({
@@ -19,12 +22,20 @@ import { UtilService } from './util.service';
     ScheduleModule.forRoot(),
     MongooseModule.forFeature([
       { name: Editor.name, schema: EditorSchema },
-      { name: Language.name, schema: LanguageSchema }
+      { name: Language.name, schema: LanguageSchema },
+      { name: Project.name, schema: ProjectSchema }
     ]),
     EditorModule,
-    LanguageModule
+    LanguageModule,
+    ProjectModule
   ],
   controllers: [AppController],
-  providers: [EditorService, LanguageService, TaskService, UtilService]
+  providers: [
+    EditorService,
+    LanguageService,
+    ProjectService,
+    TaskService,
+    UtilService
+  ]
 })
 export class AppModule {}

@@ -1,9 +1,14 @@
 {
   "name": "wartortle",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
+  "version": "2.0.0",
+  "description": "Integration with WakaTime to grab data for my personal website",
+  "homepage": "http://braxtondiggs.com",
+  "author": {
+    "name": "Braxton Diggs",
+    "email": "hello@braxtondiggs.com"
+  },
+  "repository": "braxtondiggs/wartortle",
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",

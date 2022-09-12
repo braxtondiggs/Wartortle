@@ -33,7 +33,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   await app.listen(port, '0.0.0.0', () => {
-    console.log(`Listening on port ${port}`);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`Listening on port ${port}`);
+    }
   });
 }
 bootstrap();
