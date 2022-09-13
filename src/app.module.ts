@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { HttpModule } from '@nestjs/axios';
 import { AppController } from './app.controller';
 import { TaskService } from './task.service';
 import { EditorModule } from './editor/editor.module';
@@ -26,6 +27,7 @@ import { UtilService } from './util.service';
       { name: Language.name, schema: LanguageSchema },
       { name: Project.name, schema: ProjectSchema }
     ]),
+    HttpModule,
     EditorModule,
     LanguageModule,
     ProjectModule,

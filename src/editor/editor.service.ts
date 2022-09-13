@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UtilService } from 'src/util.service';
+import { EditorDto } from './editor.dto';
 import { Editor, EditorDocument } from './editor.schema';
 
 @Injectable()
@@ -23,5 +24,9 @@ export class EditorService {
       })
       .exec();
     return this.utils.format(response);
+  }
+
+  async create(editor: EditorDto): Promise<Editor> {
+    return await this.editorModel.create(editor);
   }
 }
