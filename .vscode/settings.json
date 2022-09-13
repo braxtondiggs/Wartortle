@@ -1,0 +1,20 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "Braxton",
+    "braxtondiggs",
+    "customrange",
+    "Diggs",
+    "Fastify",
+    "lastmonth",
+    "lastweek",
+    "nestjs",
+    "thismonth",
+    "Waka",
+    "wartortle"
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
