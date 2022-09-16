@@ -34,17 +34,17 @@ export class TaskService {
 
     if (editors && editors.length > 0) {
       response.editors = this.format(editors, start);
-      // await this.editor.create(response.editors);
+      await this.editor.create(response.editors);
     }
 
     if (languages && languages.length > 0) {
       response.languages = this.format(languages, start);
-      // await this.language.create(response.languages);
+      await this.language.create(response.languages);
     }
 
     if (projects && projects.length > 0) {
       response.projects = this.format(projects, start);
-      // await this.project.create(response.projects);
+      await this.project.create(response.projects);
     }
 
     this.http.post(this.hcUrl, { ...response }).subscribe();
