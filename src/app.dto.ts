@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsOptional, IsIn } from 'class-validator';
+import { IsString, IsDateString, IsOptional, IsIn } from 'class-validator';
 import { Editor } from './editor/editor.schema';
 import { Language } from './language/language.schema';
 import { Project } from './project/project.schema';
@@ -20,14 +20,12 @@ export class QueryDto {
   @IsString()
   range: string;
 
-  @IsDate()
+  @IsDateString({ strict: true })
   @IsOptional()
-  @IsString()
   start: string;
 
-  @IsDate()
+  @IsDateString({ strict: true })
   @IsOptional()
-  @IsString()
   end: string;
 }
 

@@ -60,8 +60,8 @@ export class UtilService {
         date.end = dayjs().subtract(1, 'months').endOf('month').toISOString();
         break;
       case 'customrange':
-        date.start = dayjs(start, 'MMM Do YYYY').toISOString();
-        date.end = dayjs(end, 'MMM Do YYYY').add(1, 'days').toISOString();
+        date.start = dayjs(start).toISOString();
+        date.end = dayjs(end).add(1, 'days').toISOString();
         break;
     }
     return date;
