@@ -18,6 +18,7 @@ async function bootstrap() {
     {
       cors: {
         origin: [
+          'http://localhost:4200',
           'http://braxtondiggs.com',
           'http://www.braxtondiggs.com',
           'https://braxtondiggs.com',
