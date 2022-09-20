@@ -25,7 +25,7 @@ export class TaskService {
     private readonly http: HttpService
   ) {}
 
-  @Cron('59 3 * * *')
+  @Cron('58 3 * * *')
   async handleCron() {
     this.http.get(`${this.hcUrl}/start`).subscribe();
     const response = { editors: null, languages: null, projects: null };
