@@ -14,7 +14,6 @@ import { ProjectDto } from './project/project.dto';
 export class TaskService {
   private readonly logger = new Logger(TaskService.name);
   private readonly waka = new WakaTime(process.env.WAKATIME_API);
-  private readonly today = dayjs().format('YYYY-MM-DD');
   private readonly hcUrl =
     'https://hc-ping.com/4755b18c-2b59-4d13-a78a-5795dffb3b57';
 
@@ -53,7 +52,9 @@ export class TaskService {
 
   async get() {
     try {
-      return this.waka.summaries(this.today);
+      return this.waka.summaries(
+        dayjs().subtract(1, 'days').format('YYYY-MM-DD')
+      );
     } catch (e) {
       this.logger.error(e.toString());
       this.http.post(`${this.hcUrl}/fail`, { error: e.toString() }).subscribe();
